@@ -7,11 +7,15 @@ echarts版本4.1.0
 
 ## 安装
 
--npm
-```npm i -S git+https://github.com/fanlide/react-native-echarts.git```
+- npm
+```
+npm i -S git+https://github.com/fanlide/react-native-echarts.git
+```
 
--yarn
-```yarn add git+https://github.com/fanlide/react-native-echarts.git```
+- yarn
+```
+yarn add git+https://github.com/fanlide/react-native-echarts.git
+```
 
 ## 使用
 ```javascript
