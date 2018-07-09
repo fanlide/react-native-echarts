@@ -9,12 +9,12 @@ echarts版本4.1.0
 
 - npm
 ```
-npm i -S git+https://github.com/fanlide/react-native-echarts.git
+npm i -S react-native-wk-echarts
 ```
 
 - yarn
 ```
-yarn add git+https://github.com/fanlide/react-native-echarts.git
+yarn add react-native-wk-echarts
 ```
 
 ## 使用

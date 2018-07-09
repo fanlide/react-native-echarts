@@ -1,0 +1,20 @@
+{
+  "name": "react-native-wk-echarts",
+  "version": "1.0.0",
+  "description": "百度ECharts的react-native实现",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanlide/react-native-echarts.git"
+  },
+  "keywords": [
+    "react-native",
+    "echarts"
+  ],
+  "author": "wenkang365t",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fanlide/react-native-echarts/issues"
+  },
+  "homepage": "https://github.com/fanlide/react-native-echarts#readme"
+}
