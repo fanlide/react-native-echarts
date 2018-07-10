@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { WebView, View, ViewProps } from 'react-native';
-import renderChart from './renderChart';
+import { toString } from './common/fun';
 
 const html = `
 <!DOCTYPE html>
@@ -21,6 +21,11 @@ const html = `
 </head>
 <body>
   <div id="main" />
+  <script>
+    document.addEventListener('message', function(e) {
+      myChart.setOption(e.data);
+    });
+  </script>
 </body>
 </html>
 `
@@ -31,29 +36,40 @@ type props = {
   width?: Number,
   backgroundColor?: String,
   style?: ViewProps,
-  onPress?: Function
+  onMessage?: Function
 };
 
 export default class Index extends Component<props> {
+  constructor(props) {
+    super(props);
+    let { option, theme = require("./theme/vintage.json") } = props;
+    let optionStr = toString(option);
+    this.option = `
+      echarts.registerTheme('theme', ${JSON.stringify(theme)});
+      var myChart = echarts.init(document.getElementById('main'), 'theme');
+      myChart.setOption(${optionStr});
+    `
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.option !== this.props.option) {
-      this.chart.reload();
+      this._chart.postMessage(toString(prevProps.option))
     }
   }
 
   render() {
-    const { option, theme = require("./theme/vintage.json"),
-      height, width, style, backgroundColor = 'transparent' } = this.props;
+    const { height, width, style, backgroundColor = 'transparent' } = this.props;
     return (
       <View style={[{ flex: 1 }, { height: height || 400, width: width || "100%" }, style]}>
         <WebView
-          ref={e => this.chart = e}
+          ref={e => this._chart = e}
+          bounces={false}
           scrollEnabled={false}
-          injectedJavaScript={renderChart(option, theme)}
+          injectedJavaScript={this.option}
           style={{ flex: 1, backgroundColor: backgroundColor }}
           scalesPageToFit={false}
           source={{ html, baseUrl: 'https://cdn.bootcss.com/echarts/4.1.0/' }}
-          onMessage={event => this.props.onPress ? this.props.onPress(JSON.parse(event.nativeEvent.data)) : null}
+          onMessage={event => this.props.onMessage ? this.props.onMessage(JSON.parse(event.nativeEvent.data)) : null}
         />
       </View>
     );
