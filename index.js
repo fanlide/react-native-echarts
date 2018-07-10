@@ -49,7 +49,6 @@ export default class Index extends Component<props> {
         <WebView
           ref={e => this.chart = e}
           scrollEnabled={false}
-          renderLoading={() => alert('msg')}
           injectedJavaScript={renderChart(option, theme)}
           style={{ flex: 1, backgroundColor: backgroundColor }}
           scalesPageToFit={false}

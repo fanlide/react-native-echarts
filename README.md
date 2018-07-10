@@ -9,12 +9,12 @@ echarts版本4.1.0
 
 - npm
 ```
-npm i -S react-native-wk-echarts
+    npm i -S react-native-wk-echarts
 ```
 
 - yarn
 ```
-yarn add react-native-wk-echarts
+    yarn add react-native-wk-echarts
 ```
 
 ## 使用
