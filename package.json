@@ -1,6 +1,6 @@
 {
   "name": "react-native-wk-echarts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "百度ECharts的react-native实现",
   "main": "index.js",
   "repository": {

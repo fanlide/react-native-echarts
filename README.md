@@ -3,7 +3,9 @@
 百度ECharts的react-native实现
 
 echarts版本4.1.0
-由于，加载的是[bootcdn](http://www.bootcdn.cn/)中的在线文件，所以需在线使用
+由于，加载的是[bootcdn](http://www.bootcdn.cn/)中的在线文件，所以需在线使用,
+
+>1.0.3引入moment支持
 
 ## 安装
 

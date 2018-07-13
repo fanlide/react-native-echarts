@@ -17,7 +17,8 @@ const html = `
       padding: 0;
     }
   </style>
-  <script src="./echarts.min.js"></script>
+  <script src="./echarts/4.1.0/echarts.min.js"></script>
+  <script src="./moment.js/2.22.1/moment.min.js"></script>
 </head>
 <body>
   <div id="main" />
@@ -68,7 +69,7 @@ export default class Index extends Component<props> {
           injectedJavaScript={this.option}
           style={{ flex: 1, backgroundColor: backgroundColor }}
           scalesPageToFit={false}
-          source={{ html, baseUrl: 'https://cdn.bootcss.com/echarts/4.1.0/' }}
+          source={{ html, baseUrl: 'https://cdn.bootcss.com/' }}
           onMessage={event => this.props.onMessage ? this.props.onMessage(JSON.parse(event.nativeEvent.data)) : null}
         />
       </View>
