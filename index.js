@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { WebView, View, ViewProps } from 'react-native';
+import { WebView, View, StyleProp, ViewStyle } from 'react-native';
+import _ from 'lodash';
 import { toString } from './common/fun';
 
 const html = `
@@ -22,21 +23,16 @@ const html = `
 </head>
 <body>
   <div id="main" />
-  <script>
-    document.addEventListener('message', function(e) {
-      myChart.setOption(e.data);
-    });
-  </script>
 </body>
 </html>
 `
 type props = {
-  option: Object,
-  theme?: JSON,
-  height?: Number,
-  width?: Number,
-  backgroundColor?: String,
-  style?: ViewProps,
+  option: any,
+  theme?: any,
+  height?: number,
+  width?: number,
+  backgroundColor?: string,
+  style?: StyleProp<ViewStyle>,
   onMessage?: Function
 };
 
@@ -44,29 +40,31 @@ export default class Index extends Component<props> {
   constructor(props) {
     super(props);
     let { option, theme = require("./theme/vintage.json") } = props;
-    let optionStr = toString(option);
-    this.option = `
+    this.scriptStr = `
       echarts.registerTheme('theme', ${JSON.stringify(theme)});
       var myChart = echarts.init(document.getElementById('main'), 'theme');
-      myChart.setOption(${optionStr});
+      myChart.setOption(${toString(option)});
+      document.addEventListener('message', e => {
+        myChart.setOption(JSON.parse(e.data));
+      });
     `
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.option !== this.props.option) {
-      this._chart.postMessage(toString(prevProps.option))
+    if (!_.isEqual(prevProps.option, this.props.option)) {
+      this._chart.postMessage(JSON.stringify(this.props.option))
     }
   }
 
   render() {
     const { height, width, style, backgroundColor = 'transparent' } = this.props;
     return (
-      <View style={[{ flex: 1 }, { height: height || 400, width: width || "100%" }, style]}>
+      <View style={[{ flex: 1, height: height || 400, width: width || "100%" }, style]}>
         <WebView
           ref={e => this._chart = e}
           bounces={false}
           scrollEnabled={false}
-          injectedJavaScript={this.option}
+          injectedJavaScript={this.scriptStr}
           style={{ flex: 1, backgroundColor: backgroundColor }}
           scalesPageToFit={false}
           source={{ html, baseUrl: 'https://cdn.bootcss.com/' }}

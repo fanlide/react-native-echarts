@@ -1,6 +1,6 @@
 {
   "name": "react-native-wk-echarts",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "百度ECharts的react-native实现",
   "main": "index.js",
   "repository": {
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/fanlide/react-native-echarts/issues"
   },
-  "homepage": "https://github.com/fanlide/react-native-echarts#readme"
+  "homepage": "https://github.com/fanlide/react-native-echarts#readme",
+  "dependencies": {
+    "lodash": "^4.17.10"
+  }
 }
